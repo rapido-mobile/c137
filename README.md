@@ -1,8 +1,6 @@
 # c137
+!(search results)[shot1.png]
 
-A new Flutter project.
+An example highlighting how to use DocumentListView along with an online search.
 
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+Highlights parsing json results to create Documents, and using emptyWidgetList to enhance the user experience.
