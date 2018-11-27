@@ -1,5 +1,5 @@
 # c137
-!(search results)[shot1.png]
+![search results](shot1.png)
 
 An example highlighting how to use DocumentListView along with an online search.
 
