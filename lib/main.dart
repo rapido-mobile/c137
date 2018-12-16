@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text("No Results",
           style: TextStyle(fontSize: 50.0, color: Colors.red)));
 
-  // store a variable for the empty list widget
+            // store a variable for the empty list widget
   Widget _currentEmptyListWidget;
 
   _MyHomePageState() {
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // future. You can either call it with await in order to block
     // or use then, to not block, but then to process the data
     // when it arrives, like in this example
-    getAndUseRemoteJSon(url).then((dynamic map) {
+    getAndDecodeRemoteJSon(url).then((Map map) {
       List<dynamic> resultList = map["results"];
 
       // in the case where the return results are null (usually because
@@ -100,19 +100,20 @@ class _MyHomePageState extends State<MyHomePage> {
       if (resultList == null) {
         setState(() {
           _currentEmptyListWidget = _emptyResultsWidget;
+
         });
       } else {
         // if there were results, we process them with the helper function
         // which creates a Document from each result which gets added to the
         // DocumentList which is displayed in the DocumentListView
         resultList.forEach((dynamic item) {
-          _documentList.add(_docFromMap(item));
+          _documentList.add(_docFromSearchResultsMap(item));
         });
       }
     });
   }
 
-  Document _docFromMap(Map<String, dynamic> map) {
+  Document _docFromSearchResultsMap(Map<String, dynamic> map) {
     // extract the location, which is another map
     Map<String, dynamic> locOb = map["location"];
 
@@ -144,8 +145,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         child: DocumentListView(
           _documentList,
-          emptyListWidget: _currentEmptyListWidget,
           customItemBuilder: characterCard,
+          emptyListWidget: _currentEmptyListWidget,
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
